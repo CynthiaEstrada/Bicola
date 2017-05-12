@@ -1,3 +1,5 @@
+#include <cstdio>
+#include <ctime>
 
 
 class node{
@@ -17,7 +19,7 @@ public:
 
 };
 
-class Bicola{
+class Servicios{
 
     int s = 0;
     int n = s;
@@ -26,22 +28,19 @@ class Bicola{
     node *Final;
     node *Actual;
 
-    void LiberarBicola();
-
-
     public:
 
     node *p = NULL;//estos dos deberian de estar en el main creo
     node *q = NULL;//este tambien
-    Bicola(){
+
+    Servicios(){
+
     this ->Frente = NULL;
     this ->Final = NULL;
     this ->Actual = NULL;
     int Tamanio();
 
     }
-
-//    ~Bicola(){LiberarBicola();}
 
 
     int Tamanio(int x){return s =x;}
@@ -50,14 +49,32 @@ class Bicola{
     bool insFrente(int x);
     bool insFinal(int x);
 
+    void CrearServicios(node *_a);//Para crear servicios
+    void InsertarServicio(int x);
+
     bool full() {return s==n;}
     bool vacia(){return (this ->Frente == NULL);}
 
        friend class node;
 };
-Bicola bi;
 
-bool Bicola::insFrente(int x){
+class Procesos{
+
+    Procesos *Frente;
+    Procesos *Final;
+    node* Servicios;
+
+public:
+
+    Procesos();
+
+    void CrearProcesos(int x);
+    void InsertarProceso(int x);
+
+};
+Servicios se;
+
+bool Servicios::insFrente(int x){
 
     node *nuevo = new node(x);
     if(vacia()){
@@ -87,7 +104,7 @@ node* node::Anterior(node *_a){//pasarle el nodo del que va a ir enlazado despue
 
 }
 
-bool  Bicola::insFinal(int x){
+bool  Servicios::insFinal(int x){
 
     node *nuevo = new node(x);
 
@@ -103,7 +120,5 @@ bool  Bicola::insFinal(int x){
 
     }
 
-/*void Bicola::LiberarBicola(){
-    *Frente = NULL;
-}*/
+
 

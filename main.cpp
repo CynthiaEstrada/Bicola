@@ -21,9 +21,11 @@ public:
     Procesos(int x): numero(x){_anterior = NULL; _siguiente = NULL; Frente = NULL; Actual = NULL; Final=NULL;}
     Procesos(){_lista = NULL;};
     Procesos* crearLista(int x);
-    void crearServicios(Procesos *_a, Procesos *_b,  int n);
+    //void crearServicios(Procesos *_a, Procesos *_b,  int n);
     Procesos* Insertar(Procesos *_b, int x);
     void MostrarLista(Procesos *_a, int tm);
+
+    Procesos* Lista(Procesos* _a){return _a ->_lista;}
 
     int Tamanio(int x){return s =x;}
     bool vacia(){return (this ->Frente == NULL);}
@@ -32,6 +34,13 @@ public:
 
     //friend class Bicola;
 };
+
+    class Servicios{
+    public:
+        void crearServicios(Procesos *_a, Procesos *_b,  int n);
+    };
+
+
 
 Procesos pr;
 
@@ -43,10 +52,8 @@ void Procesos::MostrarLista(Procesos *_a, int tm){
     ind= _a ->numero;
     t = tm;
     for(int j = 1; j<=tm; j++){//for para servicios
-        printf("Cuando ind vale: %i j vale: %i: \n\n", ind, j);
-        printf("%i [%i] -->", j, ind);
-
-
+        //printf("Cuando ind vale: %i j vale: %i: \n\n", ind, j);
+        printf("[%i] -->", ind);
         //t = aux ->tam;
         for(int i = 1; i <= tm; i++){//for para Procesos
             (aux) ? printf("[%i] ",aux->_lista) : printf("hola");// al terminar este for
@@ -79,27 +86,39 @@ Procesos* Procesos::crearLista(int x){
         nuevoP = Actual;//creo que este no lo voy a ocupar
         }
     }
+        Actual->_lista = NULL;
+
     return Frente;
 }
 
-void Procesos::crearServicios(Procesos *_a, Procesos *_b, int n){
+void Servicios::crearServicios(Procesos *_a, Procesos *_b, int n){
 
     int Contador = 1;
+    int rnd1, rnd2, j=1;
+
     Procesos *aux;
     Procesos *aux2;
+    Procesos *aux3;
+
     aux = _a;
     aux2 = _b;
-    int rnd1, rnd2;
-    if(!vacia2(_b)){
-    for(int i = 0; i<=50;){
 
-        rnd1 = rand()%n;
-        //j++;
-        for (int j = 0; j == rnd1; j++){
+    printf("_b Vale: %d \n",_b);
+    if(vacia2(_b)){
+
+        for(int i = 0; i<=50;){
+
+        rnd1 = rand()%n +1;
+        printf("Rnd1 vale: %i  i Vale: %i \n", rnd1, i);
+
+       // j++;
+        while (j == rnd1){
+                j++;
+        printf("J Vale:%i \n", j);
             rnd2 = rand()%100;
             printf("El que se debe de insertar: %i \n", rnd2);
             aux ->_lista = Insertar(_b, rnd2);
-            printf("aux -> _Lista: %i", aux->_lista);
+            printf("_b: %i", _b->numero);
             aux->tam +=1;
             i++;
             //Tamanio(Contador++);
@@ -110,24 +129,26 @@ void Procesos::crearServicios(Procesos *_a, Procesos *_b, int n){
 }
 
 Procesos* Procesos::Insertar(Procesos *_b, int x){
+
     Procesos *nuevoP = new Procesos(x);
     Procesos* NFrente;
     Procesos *aux1;
-    NFrente = _b;
+    NFrente = NULL;
+    _b = NFrente;
 
     if(vacia2(_b)){
-        NFrente = nuevoP;
+        _b = nuevoP;
         printf("Dentro del if se inserto: %i \n", nuevoP->numero);
-        return NFrente;
+        return _b;
     }
     else{
 
-        aux1 = NFrente;
-        NFrente = nuevoP;
+        aux1 = _b;
+        _b = nuevoP;
         nuevoP->_siguiente = aux1;
         aux1 ->_anterior = nuevoP;
         printf("Dentro del else se inserto: %i \n", nuevoP->numero);
-        return NFrente;
+        return _b;
     }
 }
 
@@ -140,7 +161,7 @@ int main()
        z = rand() % 100;
         bi.insFrente(z);
     }*/
-
+    srand(time(NULL));
     int num, num2;
     printf("Numero de Procesos: ");
     scanf("%i", &num);
@@ -149,6 +170,9 @@ int main()
     Procesos *_b;
     _b = NULL;
     _a = pr.crearLista(num);
+
+    printf("_b Valdria:%i \n", pr.Lista(_a));
+    _b = pr.Lista(_a);
     pr.crearServicios(_a, _b, num);
     pr.MostrarLista(_a, num);
     scanf("%i", &num2);
