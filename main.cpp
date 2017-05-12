@@ -43,15 +43,16 @@ void Procesos::MostrarLista(Procesos *_a, int tm){
     ind= _a ->numero;
     t = tm;
     for(int j = 1; j<=tm; j++){//for para servicios
-        printf("[%i] -->", ind);
-        aux = aux ->_siguiente;
-        (aux) ? ind = aux ->numero : printf("Hola") ;
+        printf("Cuando ind vale: %i j vale: %i: \n", ind, j);
+        printf("%i [%i] -->", j, ind);
+        (aux) ? ind = aux ->numero : printf(" ") ;
+
         //t = aux ->tam;
         for(int i = 1; i <= tm; i++){//for para Procesos
-            printf("[%i] ", aux->_lista);// al terminar este for
+            (aux) ? printf("[%i] ",aux->_lista) : printf("hola");// al terminar este for
         }
-        printf("\n");
-
+        printf("\n \n");
+        aux = aux ->_siguiente;
     }
 
 
