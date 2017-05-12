@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1494573773 source:c:\users\cyndi\desktop\carpertas\c++\bicola\main.cpp
+	<cstdio>
+	<cstdlib>
+	<ctime>
+
